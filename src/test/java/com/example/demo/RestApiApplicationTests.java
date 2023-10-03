@@ -7,9 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class RestApiApplicationTests {
-	@Test
-	public void sampleTestCase() {
-		assertTrue("Hello", true);
-	}
-
+	
+	
 }
