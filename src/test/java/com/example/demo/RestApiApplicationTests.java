@@ -1,11 +1,15 @@
 package com.example.demo;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class RestApiApplicationTests {
-
-	
+	@Test
+	public void sampleTestCase() {
+		assertTrue("Hello", true);
+	}
 
 }
