@@ -7,7 +7,7 @@ pipeline {
 		stage("Building the project"){
 			steps{
 				echo "Building the project using Maven"
-				sh 'mvn clean package'
+				bat 'mvn clean package'
 			}
 		}
 		stage("Containerizing using docker"){
@@ -20,7 +20,7 @@ pipeline {
 				echo "Pushing the docker image to dockerhub"
 			}
 		}
-		stage("Executing the docker image is AWS cloud instance"){
+		stage("Executing the docker image in AWS cloud instance"){
 			steps{
 				echo "establishing SSH connection to AWS cloud instance"
 				echo "Pulling the docker image and executing the docker container"
