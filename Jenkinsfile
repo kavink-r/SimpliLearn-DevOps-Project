@@ -13,7 +13,7 @@ pipeline {
 		stage("Containerizing using docker"){
 			steps{
 				echo "Containerizing the application using Docker"
-				bat 'docker build -t kavinkr/sample-app:JpipeAPI'
+				bat 'docker build -t kavinkr/sample-app:JpipeAPI .'
 			}
 		}
 		stage("Pushing to Dockerhub"){
