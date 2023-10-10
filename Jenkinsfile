@@ -4,6 +4,7 @@ pipeline {
 		stage("Building the project"){
 			steps{
 				echo "Building the project using Maven"
+				sh 'mvn clean package'
 			}
 		}
 		stage("Containerizing using docker"){
