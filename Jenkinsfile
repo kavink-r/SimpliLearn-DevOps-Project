@@ -13,11 +13,13 @@ pipeline {
 		stage("Containerizing using docker"){
 			steps{
 				echo "Containerizing the application using Docker"
+				bat 'docker build -t kavinkr/sample-app:JpipeAPI'
 			}
 		}
 		stage("Pushing to Dockerhub"){
 			steps{
 				echo "Pushing the docker image to dockerhub"
+				bat 'docker push kavinkr/sample-app:JpipeAPI'
 			}
 		}
 		stage("Executing the docker image in AWS cloud instance"){
