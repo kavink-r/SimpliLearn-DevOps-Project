@@ -6,17 +6,23 @@ pipeline {
 	stages {
 		stage("Building the project"){
 			steps{
-				sh 'mvn clean package'
+				bat 'mvn clean package'
 			}
 		}
 		stage("Creating docker image"){
 			steps{
-				sh 'docker build -t SimpliLearn-Devops-Project:api .'
+				bat 'docker build -t kavinkr/DevOpsProject:api .'
 			}
 		}
-		stage("Creating and executing docker container"){
+		stage("Pushing docker image to DockerHub"){
 			steps{
-				sh 'docker run -d -p 8090:8080 --env-file /home/ubuntu/appenv.txt --name RestApi SimpliLearn-Devops-Project:api'
+				bat 'docker push kavinkr/DevOpsProject:api'
+			}
+		}
+
+		stage("Pulling image from docker hub and executing container on api server over SSH connection"){
+			steps{
+				sshPublisher(publishers: [sshPublisherDesc(configName: 'api-host', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'sudo docker pull kavinkr/DevOpsProject:api', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: ''), sshTransfer(cleanRemote: false, excludes: '', execCommand: 'sudo docker run -d -p 8090:8080 --env-file appenv.txt --name api kavinkr/DevOpsProject:api', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
 			}
 		}
 		
