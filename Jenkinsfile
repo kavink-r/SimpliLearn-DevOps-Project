@@ -6,7 +6,7 @@ pipeline {
 	stages {
 		stage("Building the project"){
 			steps{
-				bat 'mvn clean package'
+				maven 'mvn clean package'
 			}
 		}
 		stage("Creating docker image"){
